@@ -5,16 +5,17 @@ const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "index.html": "381954d7c33aa8d2ac15eb909eef4d7e",
 "/": "381954d7c33aa8d2ac15eb909eef4d7e",
-"main.dart.js": "fb4c3e0ef40a7ad1e8d79701cce8a5ea",
+"main.dart.js": "8e75b9163ae6242fb6d8761ecb3faf73",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "03c105a186aee87eb06f336f4cc0777f",
-"assets/AssetManifest.json": "9050ba7ff095ea2f628162bebe09e168",
-"assets/NOTICES": "b370eeb2b4cb41c3395512483e20c1ab",
-"assets/FontManifest.json": "08792490555b179235543cfffa3ed5ec",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
+"assets/AssetManifest.json": "f42e2ddf132ae7b6583408a641df88a0",
+"assets/NOTICES": "cb2b5462c747fa276d62bb9a602ba16b",
+"assets/FontManifest.json": "8f036bb4279e4857a966e259b818f8ae",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "4b9123f59422885f8f42d2d613f0bca3",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
+"assets/fonts/MaterialIcons-Regular.otf": "4a4395c26cbd2a7b63f2b8d540f6a8e8",
 "assets/assets/download.png": "22355e71e2eb3f29dcba92daa1f1a054",
 "assets/assets/instagram.png": "1499aca649c035c7eb7e2ff6e7845b4e",
 "assets/assets/github.png": "d22ee3727a7216019c3848df6eafa024",
@@ -42,8 +43,8 @@ const CORE = [
 self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
-      // Provide a no-cache param to ensure the latest version is downloaded.
-      return cache.addAll(CORE.map((value) => new Request(value, {'cache': 'no-cache'})));
+      // Provide a 'reload' param to ensure the latest version is downloaded.
+      return cache.addAll(CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
@@ -116,7 +117,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.url == origin || event.request.url.startsWith(origin + '/#')) {
     key = '/';
   }
-  // If the URL is not the the RESOURCE list, skip the cache.
+  // If the URL is not the RESOURCE list, skip the cache.
   if (!RESOURCES[key]) {
     return event.respondWith(fetch(event.request));
   }
@@ -126,7 +127,7 @@ self.addEventListener("fetch", (event) => {
         // Either respond with the cached resource, or perform a fetch and
         // lazily populate the cache. Ensure the resources are not cached
         // by the browser for longer than the service worker expects.
-        var modifiedRequest = new Request(event.request, {'cache': 'no-cache'});
+        var modifiedRequest = new Request(event.request, {'cache': 'reload'});
         return response || fetch(modifiedRequest).then((response) => {
           cache.put(event.request, response.clone());
           return response;
@@ -139,11 +140,11 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener('message', (event) => {
   // SkipWaiting can be used to immediately activate a waiting service worker.
   // This will also require a page refresh triggered by the main worker.
-  if (event.message == 'skipWaiting') {
+  if (event.data === 'skipWaiting') {
     return self.skipWaiting();
   }
 
-  if (event.message = 'downloadOffline') {
+  if (event.message === 'downloadOffline') {
     downloadOffline();
   }
 });
