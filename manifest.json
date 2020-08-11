@@ -1,11 +1,11 @@
 {
-    "name": "hemachandran",
-    "short_name": "hemachandran",
+    "name": "Hemachandran",
+    "short_name": "Hemz",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "My Portfolio Website.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
@@ -15,7 +15,7 @@
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.png",
+            "src": "https://i.ibb.co/sVpbSLj/web-hi-res-512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
