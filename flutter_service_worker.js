@@ -3,18 +3,42 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "version.json": "8de8fb892d58ff5f1b8e9d5f3fc37d1d",
-"index.html": "526d4f12076b948f0e2b9aa207066684",
-"/": "526d4f12076b948f0e2b9aa207066684",
-"main.dart.js": "a94cad60c4a91e40db8f8b20404d3721",
-"manifest.json": "04814e3e1b5429a382c0e3d263d2e947",
-"assets/AssetManifest.json": "12e78b5548d308890345a8794508d8a8",
-"assets/NOTICES": "22bc2330db09017b0771f437fccf44e8",
-"assets/FontManifest.json": "8f036bb4279e4857a966e259b818f8ae",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
+  "version.json": "084a7bfe680f88efce52ef8e783303f4",
+"index.html": "4ef5dc5a204d82e68e5c20681c02616b",
+"/": "4ef5dc5a204d82e68e5c20681c02616b",
+"main.dart.js": "7717783ebc1d75c7419fb729d676095c",
+"manifest.json": "5f346b49b5c1cb2062cd9cfba140631d",
+"assets/AssetManifest.json": "ed8cac186c3900f60ea056c22a3511f9",
+"assets/NOTICES": "d4572d03332fd840b954bebc5a95e83a",
+"assets/FontManifest.json": "53db916e40f5cd339f7e07ff4f1303a1",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/assets/GoogleSansRegular.ttf": "b5c77a6aed75cdad9489effd0d5ea411",
-"assets/assets/FontManifest.json": "59c37979205b4b43589051e92e27cbcd"
+"assets/assets/azure-fundamentals.png": "32e8d37fc83a9174504f1de1395c0fde",
+"assets/assets/azure-developer.png": "59369cca7a7046533a382fd441bbf2c4",
+"assets/assets/projects/medkit.png": "915431d4f438d5bc7c642fed8dbfb419",
+"assets/assets/projects/medkitB.png": "058d00d54c3ee8a953442d0cf3bfb866",
+"assets/assets/projects/flutter.png": "0b5a2f8d3f4d173805affaf9f84f6c87",
+"assets/assets/projects/earbender.png": "64099d76f6c7df0fac39c222293fd473",
+"assets/assets/projects/java.png": "62be9fb6e1d7166e9cbeeed913096752",
+"assets/assets/projects/hereiam.png": "cbb5a77a5e19e1224080dcaf0e3b5407",
+"assets/assets/projects/android.png": "765adf924dae4d5e67bfb640bcd05c48",
+"assets/assets/projects/quran.png": "55e8a0c928bc192f682ca0e61cb61ce3",
+"assets/assets/projects/hereiamB.png": "16ee68a57fbf0eae5c50e1b8376064df",
+"assets/assets/projects/messenger.png": "f28ead750653b586737ed63db6f2d53a",
+"assets/assets/projects/covid.png": "27c600501d335324e8fce4c5d6c22b76",
+"assets/assets/projects/quranB.png": "3cf070457b64cf93d11ad2073bff88e2",
+"assets/assets/projects/covidB.png": "1884ac58a9de5d81e995f1e46e4b7398",
+"assets/assets/ansible.png": "d299b719911334a06d1ecd4218379b62",
+"assets/assets/hi.gif": "cad5918d86b6a7e83f1fb4acead70e4c",
+"assets/assets/fonts/agustina.otf": "7b9833076716a8d14eec0cf885a3153c",
+"assets/assets/fonts/montserrat.ttf": "ee6539921d713482b8ccd4d0d23961bb",
+"assets/assets/services/app.png": "9d2da88edb7f550ef24874b306b4ae12",
+"assets/assets/services/rapid.png": "8d3ff9fbdddae77403af46662f011ee8",
+"assets/assets/services/hemz.JPG": "9a2877c57a986d418a2de9d2a5faec1a",
+"assets/assets/services/blog.png": "5e1cbb2c67e2b8ea9ae4bcce0705d2a4",
+"assets/assets/services/open.png": "4a5996597d32b06d91183f0860c29aab",
+"assets/assets/services/ui.png": "3cf727247752b730a05f51fe0177036f",
+"assets/assets/services/1.png": "78d49bb1d6ba051d64f67c019f97786a"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -158,7 +182,7 @@ async function downloadOffline() {
     }
     currentContent[key] = true;
   }
-  for (var resourceKey in Object.keys(RESOURCES)) {
+  for (var resourceKey of Object.keys(RESOURCES)) {
     if (!currentContent[resourceKey]) {
       resources.push(resourceKey);
     }
